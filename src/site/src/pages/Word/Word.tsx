@@ -39,7 +39,7 @@ export function Word(props: any) {
                     <button className="slider__control slider__control_prev" onClick={prevHandler}  />
                     <button className="slider__control slider__control_next" onClick={nextHandler} />
                     {arr.map((item, index) => 
-                        <Slide key={index} active={slides[index].active}><Card active={true} key={item.id} {...item} /></Slide>
+                        <Slide key={index} active={slides[index].active}><Card key={item.id} {...item} /></Slide>
                    )} 
                 </div>
             </Wrapper>
