@@ -22,7 +22,7 @@ export function Header() {
                 <img src={logo} className="header__logo" alt="unicorn"/> 
                 <p className="header__title">Learn English Words</p>
                 <ul>
-                    {headerLinks.map(item => <NavLink className="header__link" to={item.to} exact={item.exact}>{item.label}</NavLink>)}
+                    {headerLinks.map(item => <NavLink key={item.label} className="header__link" to={item.to} exact={item.exact}>{item.label}</NavLink>)}
                 </ul>
             </Wrapper>
         </header>
