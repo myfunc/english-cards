@@ -1,0 +1,28 @@
+.category-card {
+    background-color: $elementColor3;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    box-sizing: border-box;
+    padding: 30px;
+    position: relative;
+
+    &__progress {
+        font-size: 12px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    &__img {
+        width: 50%;
+        margin-bottom: 20px;
+    }
+
+    &__name {
+        font-size: 1.2rem;
+        margin: 0;
+    }
+}

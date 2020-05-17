@@ -1,0 +1,38 @@
+.header {
+    min-height: 100px;
+    background: $elementColor1;
+   
+    &__wrapper {
+        display: flex;
+        box-sizing: border-box;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        width: 70px;
+    }
+
+    &__title {
+        font-size: 32px;
+        color: $textColor2;
+    }
+
+    &__link {
+        color: $textColor2;
+        font-size: 13px;
+        font-weight: 600;
+
+        &:not(:last-of-type) {
+            margin-right: 20px;
+        }
+
+        &:hover {
+            color: $textColor5;
+        }
+
+        &.active {
+            color: $textColor4;
+        }
+    }
+}
