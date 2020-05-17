@@ -15,10 +15,12 @@ CategoryCard.defaultProps = {
 
 export function CategoryCard(props: CategoryCardProps) {
     return (
-        <div id={props.id} className="category-card">
-            <p className="category-card__progress">{props.learnedWords}/{props.totalWords}</p>
-            <img className="category-card__img" src={props.previewImageUrl} alt={props.previewImageUrl} />
-            <NavLink to={`/learn/${props.name}`}><p className="category-card__name">{props.name}</p></NavLink>
-        </div>
+        <NavLink to={`/learn/${props.name}`}>
+            <div id={props.id} className="category-card">
+                <p className="category-card__progress">{props.learnedWords}/{props.totalWords}</p>
+                <img className="category-card__img" src={props.previewImageUrl} alt={props.previewImageUrl} />
+                <p className="category-card__name">{props.name}</p>
+            </div>
+        </NavLink>
     )
 }
