@@ -1,0 +1,39 @@
+.card {
+    background-color: $elementColor3;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    box-sizing: border-box;
+    padding: 30px;
+
+    &__img {
+        width: 50%;
+        margin-bottom: 20px;
+    }
+
+    &__native-translation {
+        font-size: 1.2rem;
+    }
+
+    &__input {
+        display: block;
+        width: 80%;
+        padding: 5px 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: $textColor1;
+        background-color: $elementColor2;
+        background-clip: padding-box;
+        border: 1px solid $elementColor1;
+        border-radius: 3px;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+        &:focus {
+            outline: 0;
+            border-color: #7952b3;
+            box-shadow: 0 0 0 3px rgba(121,82,179,.25);
+        }
+    }
+}
