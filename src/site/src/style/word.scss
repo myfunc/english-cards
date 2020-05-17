@@ -1,0 +1,25 @@
+.word {
+    padding: 70px 0;
+
+    &__title {
+        text-align: center;
+    }
+
+    &__content {
+        width: 300px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &__return {
+        margin-bottom: 30px;
+    }
+
+    &__return-link {
+        &::before {
+            content: "← ";
+        }
+    }
+}
