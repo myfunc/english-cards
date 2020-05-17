@@ -5,7 +5,6 @@ export type CardProps = {
     nativeTranslation: string
     foreignTranslations: string[]
     imageUrl: string
-    active: boolean
 }
 
 Card.defaultProps = {
