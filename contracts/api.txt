@@ -1,0 +1,115 @@
+POST /login
+	Request 
+		Headers:
+			Content-type: application/json
+		Body:
+			{
+				"login": string,
+				"password": string
+			}
+		
+	Response 
+		Headers:
+			Set-Cookie: Authorization={token}            // Authorization token
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				}
+			}
+		
+POST /registration
+	Request:
+		Headers:
+			Content-type: application/json
+		Body:
+			{
+				"login": string,
+				"password": string,
+				"email": string
+			}
+		
+	Response: 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				}
+			}
+			
+GET /groups
+	Request 
+		Headers:
+			Authorization: token                 // Requires token
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				},
+				groups: [{
+					"id": string,
+					"name": string,
+					"totalWords": number,
+					"learnedWords": number,
+					"previewImageUrl": string
+				}]
+			}
+			
+POST /words
+	Request 
+		Headers:
+			Content-type: application/json
+			Authorization: token
+		Body:
+			{
+				"mode": string ("group"/"learned"/"all"),        // 3 possible values. If {"mode": "group"}, need to set "groupId"
+				"groupId": string
+			}
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				},
+				words: [{
+					"id": string,
+					"nativeTranslation": string,        // Russian word
+					"foreignTranslations": string[],    // English words
+					"imageUrl": string
+				}]
+			}
+			
+POST /commit
+	Request 
+		Headers:
+			Content-type: application/json
+			Authorization: token
+		Body:
+			{
+				"words": [{
+					"wordId": string,
+					"learnAttempts": string,
+					"isStudied": boolean
+				}]
+			}
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				}
+			}
