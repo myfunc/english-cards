@@ -1,0 +1,123 @@
+.slider {
+  position: relative;
+  width: 300px;
+  height: 300px;
+
+  &__control {
+    position: absolute;
+    top: 50%;
+    margin-top: -22px;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    color: $textColor1;
+    background-color: transparent;
+    font-size: 32px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+
+    &_prev {
+        left: -50px;
+            &::before {
+                content: "←";
+            }
+        }
+        
+    &_next {
+        right: -50px;
+        &::before {
+            content: "→";
+            }
+        }
+    }
+
+    &__content {
+        position: relative;
+        overflow: hidden;
+        width: inherit;
+        height: inherit;
+        background-color: $elementColor3;
+    }
+}
+
+
+.slide {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: inherit;
+  min-width: inherit;
+  min-height: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+}
+
+.-active {
+  opacity: 1;
+  z-index: 10;
+}
+
+.-show-to-left {
+  animation: showToLeft 0.5s forwards;
+}
+
+.slide.-show-to-right {
+  animation: showToRight 0.5s forwards;
+}
+
+.-hide-to-left {
+  animation: hideToLeft 0.5s forwards;
+}
+
+.-hide-to-right {
+  animation: hideToRight 0.5s forwards;
+}
+
+@keyframes showToLeft {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes showToRight {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes hideToLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes hideToRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
