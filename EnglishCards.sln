@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishCards.Host", "src\se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishCards.Model", "src\server\EnglishCards.Model\EnglishCards.Model.csproj", "{6A2BA9CD-4D7F-4226-8B19-000C12AF574A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishCards.Service", "src\server\EnglishCards.Service\EnglishCards.Service.csproj", "{EA77D033-F77F-4B4D-8636-3D2AAE6A64F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishCards.Contract", "src\server\EnglishCards.Contract\EnglishCards.Contract.csproj", "{C88D2DEA-701F-4761-B670-7EBFD21FD1B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6A2BA9CD-4D7F-4226-8B19-000C12AF574A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A2BA9CD-4D7F-4226-8B19-000C12AF574A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A2BA9CD-4D7F-4226-8B19-000C12AF574A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA77D033-F77F-4B4D-8636-3D2AAE6A64F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA77D033-F77F-4B4D-8636-3D2AAE6A64F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA77D033-F77F-4B4D-8636-3D2AAE6A64F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA77D033-F77F-4B4D-8636-3D2AAE6A64F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C88D2DEA-701F-4761-B670-7EBFD21FD1B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C88D2DEA-701F-4761-B670-7EBFD21FD1B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C88D2DEA-701F-4761-B670-7EBFD21FD1B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C88D2DEA-701F-4761-B670-7EBFD21FD1B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

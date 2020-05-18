@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EnglishCards.Model\EnglishCards.Model.csproj" />
+    <ProjectReference Include="..\EnglishCards.Service\EnglishCards.Service.csproj" />
   </ItemGroup>
 
 

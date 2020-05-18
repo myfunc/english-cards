@@ -20,15 +20,18 @@ namespace EnglishCards.Model
         public DbSet<SysSetting> SysSettings { get; set; }
         public DbSet<UserInGroup> UserInGroups { get; set; }
 
-        public DataContext()
+        private string _connectionString;
+
+        public DataContext(string connectionString)
         {
-            Database.EnsureDeleted();
+            _connectionString = connectionString;
+            // Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(Environment.GetEnvironmentVariable("ECDB_CONNECTION"));
+            optionsBuilder.UseMySQL(_connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

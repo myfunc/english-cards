@@ -19,6 +19,10 @@ namespace EnglishCards.Host
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             ServerHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddEnvironmentVariables(prefix: "ENGCAR_");
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
