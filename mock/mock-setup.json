@@ -1,0 +1,51 @@
+[
+  {
+    "port": 9999,
+    "useCORs": false,
+    "addDefault": false,
+    "defaultBody": "{\"statusCode\":200,\"headers\":{\"connection\":\"close\"},\"body\":\"stuff\"}",
+    "CORsOrigin": "http://localhost:8383",
+    "allowedCORsHeaders": "application/json,Content-Type",
+    "allowedCORsMethods": "GET,POST,PUT,PATCH,DELETE",
+    "id": 0,
+    "description": "New Imposter Description 0",
+    "imposters": [
+      {
+        "responses": [
+          {
+            "status": 200,
+            "injection": {
+              "use": false,
+              "body": ""
+            },
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": "{\n\t\"isSuccess\": true,\n\t\"error\" : null,\n\t\"groups\": [{\n\t\t\"id\": \"a611adea-b85e-411a-9d6a-68aa7d570e0c\",\n\t\t\"name\": \"Medicine\",\n\t\t\"totalWords\": 10,\n\t\t\"learnedWords\": 4,\n\t\t\"previewImageUrl\": \"https://4.imimg.com/data4/EI/SM/MY-4092588/antipyretic-medication-500x500.jpg\"\n\t}, {\n\t\t\"id\": \"6ee58890-05c3-404d-a5ae-cb7f3b2eec5b,\n\t\t\"name\": \"Food\",\n\t\t\"totalWords\": 15,\n\t\t\"learnedWords\": 0,\n\t\t\"previewImageUrl\": \"https://addapinch.com/wp-content/uploads/2017/06/honey-lime-fruit-salad-recipe-DSC_0506-500x500.jpg\"\n\t}, {\n\t\t\"id\": \"abb2848e-17f5-4df4-a713-b5a7e21ee70b\",\n\t\t\"name\": \"Travel\",\n\t\t\"totalWords\": 11,\n\t\t\"learnedWords\": 3,\n\t\t\"previewImageUrl\": \"https://lh3.googleusercontent.com/proxy/CJmEQDmhrGxlvUOTOelLk50gSyeA3PuldH1XWQ4HG0jjht-vS1ZYDc3Ss38Rg4Z6inP333y6s2DAqta6iwiI8TR8EBnHvQC2AJwsZajkrJfbR0MqDoENpwjIin0uHvqzChBlaUZBJQ\"\n\t}]\n}"
+          }
+        ],
+        "match": {
+          "path_match": {
+            "type": "equals",
+            "value": "groups"
+          },
+          "injection": {
+            "use": false,
+            "body": ""
+          },
+          "verb": "GET",
+          "headers": [],
+          "query_params": [],
+          "body_match": {
+            "type": "equals",
+            "body": ""
+          }
+        },
+        "documentation": "Group"
+      }
+    ]
+  }
+]

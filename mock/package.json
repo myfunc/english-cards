@@ -1,0 +1,12 @@
+{
+  "name": "mock",
+  "description": "mock english cards",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "mock": "mb --configfile ./imposters.ejs"
+  },
+  "dependencies": {
+    "mountebank": "^2.2.1"
+  }
+}
