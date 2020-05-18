@@ -17,6 +17,7 @@ export function Card(props: CardProps) {
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (props.foreignTranslations.includes(e.target.value)) {
             isTranslated(true);
+            e.target.blur();
         } else {
             isTranslated(false);
         }
