@@ -2,7 +2,6 @@
   position: relative;
   width: 300px;
   height: 300px;
-//   overflow: hidden;
 
   &__control {
     position: absolute;
@@ -32,6 +31,14 @@
             content: "→";
             }
         }
+    }
+
+    &__content {
+        position: relative;
+        overflow: hidden;
+        width: inherit;
+        height: inherit;
+        background-color: $elementColor3;
     }
 }
 
