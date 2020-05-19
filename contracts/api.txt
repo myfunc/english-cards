@@ -40,7 +40,7 @@ POST /registration
 GET /userData
 	Request 
 		Headers:
-			Authorization: token                 // Requires token
+			Cookies: Authorization=token                 // Requires token
 		
 	Response 
 		Body:
@@ -60,7 +60,7 @@ GET /userData
 GET /groups
 	Request 
 		Headers:
-			Authorization: token                 // Requires token
+			Cookies: Authorization=token                 // Requires token
 		
 	Response 
 		Body:
@@ -81,7 +81,7 @@ GET /groups
 			
 POST /words
 	Request 
-			Authorization: token
+			Cookies: Authorization=token
 		Body:
 			{
 				"mode": string ("group"/"learned"/"all"),        // 3 possible values. If {"mode": "group"}, need to set "groupId"
@@ -106,7 +106,7 @@ POST /words
 			
 POST /commit
 	Request 
-			Authorization: token
+			Cookies: Authorization=token
 		Body:
 			{
 				"words": [{

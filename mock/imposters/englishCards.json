@@ -45,9 +45,6 @@
           "and": [
             {
               "equals": {
-                "headers": {
-                  "Authorization": "TheToken"
-                },
                 "method": "GET",
                 "path": "/groups"
               }
@@ -117,10 +114,7 @@
             {
               "equals": {
                 "method": "POST",
-                "path": "/words",
-                "headers": {
-                  "Authorization": "TheToken"
-                }
+                "path": "/words"
               }
             }
           ],
@@ -258,10 +252,7 @@
         {
           "is": {
             "headers": {
-              "Content-Type": "application/json",
-              "headers": {
-                "Authorization": "TheToken"
-              }
+              "Content-Type": "application/json"
             },
             "statusCode": 200,
             "body": {
@@ -289,10 +280,7 @@
         {
           "is": {
             "headers": {
-              "Content-Type": "application/json",
-              "headers": {
-                "Authorization": "TheToken"
-              }
+              "Content-Type": "application/json"
             },
             "statusCode": 200,
             "body": {
