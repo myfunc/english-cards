@@ -10,7 +10,33 @@
               "Content-Type": "application/json"
             },
             "statusCode": 200,
-            "body": "{ \"isSuccess\": true, \"error\": null, \"groups\": [ { \"id\": \"a611adea-b85e-411a-9d6a-68aa7d570e0c\", \"name\": \"Medicine\", \"totalWords\": 10, \"learnedWords\": 4, \"previewImageUrl\": \"https://4.imimg.com/data4/EI/SM/MY-4092588/antipyretic-medication-500x500.jpg\" }, { \"id\": \"6ee58890-05c3-404d-a5ae-cb7f3b2eec5b\", \"name\": \"Food\", \"totalWords\": 15, \"learnedWords\": 0, \"previewImageUrl\": \"https://addapinch.com/wp-content/uploads/2017/06/honey-lime-fruit-salad-recipe-DSC_0506-500x500.jpg\" }, { \"id\": \"abb2848e-17f5-4df4-a713-b5a7e21ee70b\", \"name\": \"Travel\", \"totalWords\": 11, \"learnedWords\": 3, \"previewImageUrl\": \"https://lh3.googleusercontent.com/proxy/CJmEQDmhrGxlvUOTOelLk50gSyeA3PuldH1XWQ4HG0jjht-vS1ZYDc3Ss38Rg4Z6inP333y6s2DAqta6iwiI8TR8EBnHvQC2AJwsZajkrJfbR0MqDoENpwjIin0uHvqzChBlaUZBJQ\" } ]}"
+            "body": {
+              "isSuccess": true,
+              "error": null,
+              "groups": [
+                {
+                  "id": "a611adea-b85e-411a-9d6a-68aa7d570e0c",
+                  "name": "Medicine",
+                  "totalWords": 10,
+                  "learnedWords": 4,
+                  "previewImageUrl": "https://4.imimg.com/data4/EI/SM/MY-4092588/antipyretic-medication-500x500.jpg"
+                },
+                {
+                  "id": "6ee58890-05c3-404d-a5ae-cb7f3b2eec5b",
+                  "name": "Food",
+                  "totalWords": 15,
+                  "learnedWords": 0,
+                  "previewImageUrl": "https://addapinch.com/wp-content/uploads/2017/06/honey-lime-fruit-salad-recipe-DSC_0506-500x500.jpg"
+                },
+                {
+                  "id": "abb2848e-17f5-4df4-a713-b5a7e21ee70b",
+                  "name": "Travel",
+                  "totalWords": 11,
+                  "learnedWords": 3,
+                  "previewImageUrl": "https://lh3.googleusercontent.com/proxy/CJmEQDmhrGxlvUOTOelLk50gSyeA3PuldH1XWQ4HG0jjht-vS1ZYDc3Ss38Rg4Z6inP333y6s2DAqta6iwiI8TR8EBnHvQC2AJwsZajkrJfbR0MqDoENpwjIin0uHvqzChBlaUZBJQ"
+                }
+              ]
+            }
           }
         }
       ],
@@ -19,11 +45,10 @@
           "and": [
             {
               "equals": {
-                "method": "GET"
-              }
-            },
-            {
-              "equals": {
+                "headers": {
+                  "Authorization": "TheToken"
+                },
+                "method": "GET",
                 "path": "/groups"
               }
             }
@@ -39,7 +64,50 @@
               "Content-Type": "application/json"
             },
             "statusCode": 200,
-            "body": "{\"isSuccess\":true,\"error\":null,\"words\":[{\"id\":\"0011adea-b85e-411a-9d6a-68aa7d570e0c\",\"nativeTranslation\":\"препятствие\",\"foreignTranslations\":[\"obstacle\",\"barrier\",\"let\"],\"imageUrl\":null},{\"id\":\"0022adea-b85e-411a-9d6a-68aa7d570e0c\",\"nativeTranslation\":\"подсудимый\",\"foreignTranslations\":[\"defendant\",\"accused\"],\"imageUrl\":null},{\"id\":\"0033adea-b85e-411a-9d6a-68aa7d570e0c\",\"nativeTranslation\":\"судья\",\"foreignTranslations\":[\"judge\",\"referee\"],\"imageUrl\":null},{\"id\":\"0044adea-b85e-411a-9d6a-68aa7d570e0c\",\"nativeTranslation\":\"приговор\",\"foreignTranslations\":[\"sentence\",\"judgment\",\"condemnation\"],\"imageUrl\":null}]}"
+            "body": {
+              "isSuccess": true,
+              "error": null,
+              "words": [
+                {
+                  "id": "0011adea-b85e-411a-9d6a-68aa7d570e0c",
+                  "nativeTranslation": "препятствие",
+                  "foreignTranslations": [
+                    "obstacle",
+                    "barrier",
+                    "let"
+                  ],
+                  "imageUrl": null
+                },
+                {
+                  "id": "0022adea-b85e-411a-9d6a-68aa7d570e0c",
+                  "nativeTranslation": "подсудимый",
+                  "foreignTranslations": [
+                    "defendant",
+                    "accused"
+                  ],
+                  "imageUrl": null
+                },
+                {
+                  "id": "0033adea-b85e-411a-9d6a-68aa7d570e0c",
+                  "nativeTranslation": "судья",
+                  "foreignTranslations": [
+                    "judge",
+                    "referee"
+                  ],
+                  "imageUrl": null
+                },
+                {
+                  "id": "0044adea-b85e-411a-9d6a-68aa7d570e0c",
+                  "nativeTranslation": "приговор",
+                  "foreignTranslations": [
+                    "sentence",
+                    "judgment",
+                    "condemnation"
+                  ],
+                  "imageUrl": null
+                }
+              ]
+            }
           }
         }
       ],
@@ -49,7 +117,203 @@
             {
               "equals": {
                 "method": "POST",
-                "path": "/words"
+                "path": "/words",
+                "headers": {
+                  "Authorization": "TheToken"
+                }
+              }
+            }
+          ],
+          "or": [
+            {
+              "equals": {
+                "body": {
+                  "mode": "group",
+                  "groupId": "a611adea-b85e-411a-9d6a-68aa7d570e0c"
+                }
+              }
+            },
+            {
+              "equals": {
+                "body": {
+                  "mode": "group",
+                  "groupId": "6ee58890-05c3-404d-a5ae-cb7f3b2eec5b"
+                }
+              }
+            },
+            {
+              "equals": {
+                "body": {
+                  "mode": "group",
+                  "groupId": "abb2848e-17f5-4df4-a713-b5a7e21ee70b"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "responses": [
+        {
+          "is": {
+            "headers": {
+              "Set-Cookie": "Authorization=TheToken",
+              "Content-Type": "application/json"
+            },
+            "statusCode": 200,
+            "body": {
+              "isSuccess": true,
+              "error": null
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "and": [
+            {
+              "equals": {
+                "method": "POST",
+                "path": "/login",
+                "body": {
+                  "login": "testUser",
+                  "password": "Aa123456"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "responses": [
+        {
+          "is": {
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "statusCode": 200,
+            "body": {
+              "isSuccess": false,
+              "error": {
+                "code": 403,
+                "message": "Invalid login or password"
+              }
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "and": [
+            {
+              "equals": {
+                "method": "POST",
+                "path": "/login"
+              }
+            }
+          ],
+          "not": [
+            {
+              "body": {
+                "login": "testUser",
+                "password": "Aa123456"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "responses": [
+        {
+          "is": {
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "statusCode": 200,
+            "body": {
+              "isSuccess": true,
+              "error": null
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "and": [
+            {
+              "equals": {
+                "method": "POST",
+                "path": "/registration"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "responses": [
+        {
+          "is": {
+            "headers": {
+              "Content-Type": "application/json",
+              "headers": {
+                "Authorization": "TheToken"
+              }
+            },
+            "statusCode": 200,
+            "body": {
+              "isSuccess": true,
+              "error": null
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "and": [
+            {
+              "equals": {
+                "method": "POST",
+                "path": "/commit"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "responses": [
+        {
+          "is": {
+            "headers": {
+              "Content-Type": "application/json",
+              "headers": {
+                "Authorization": "TheToken"
+              }
+            },
+            "statusCode": 200,
+            "body": {
+              "isSuccess": true,
+              "error": null,
+              "userData": {
+                "id": "0124adea-b85e-411a-9d6a-68aa7d512122",
+                "login": "testUser",
+                "email": "mail@example.com"
+              }
+            }
+          }
+        }
+      ],
+      "predicates": [
+        {
+          "and": [
+            {
+              "equals": {
+                "method": "GET",
+                "path": "/userData"
               }
             }
           ]

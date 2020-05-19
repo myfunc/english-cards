@@ -1,7 +1,5 @@
 POST /login
 	Request 
-		Headers:
-			Content-type: application/json
 		Body:
 			{
 				"login": string,
@@ -22,8 +20,6 @@ POST /login
 		
 POST /registration
 	Request:
-		Headers:
-			Content-type: application/json
 		Body:
 			{
 				"login": string,
@@ -40,6 +36,26 @@ POST /registration
 					"message": string
 				}
 			}
+
+GET /userData
+	Request 
+		Headers:
+			Authorization: token                 // Requires token
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				},
+				"userData": {
+					"id": string,
+					"login": string,
+					"email": number
+				}
+			}
 			
 GET /groups
 	Request 
@@ -54,7 +70,7 @@ GET /groups
 					"code": number,
 					"message": string
 				},
-				groups: [{
+				"groups": [{
 					"id": string,
 					"name": string,
 					"totalWords": number,
@@ -65,8 +81,6 @@ GET /groups
 			
 POST /words
 	Request 
-		Headers:
-			Content-type: application/json
 			Authorization: token
 		Body:
 			{
@@ -82,7 +96,7 @@ POST /words
 					"code": number,
 					"message": string
 				},
-				words: [{
+				"words": [{
 					"id": string,
 					"nativeTranslation": string,        // Russian word
 					"foreignTranslations": string[],    // English words
@@ -92,8 +106,6 @@ POST /words
 			
 POST /commit
 	Request 
-		Headers:
-			Content-type: application/json
 			Authorization: token
 		Body:
 			{
