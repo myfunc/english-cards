@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "scripts": {
-    "mock": "mb --configfile ./imposters.ejs"
+    "mock": "mb --configfile ./imposters.ejs --allowCORS"
   },
   "dependencies": {
     "mountebank": "^2.2.1"

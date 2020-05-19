@@ -1,13 +1,15 @@
 {
   "port": 9999,
   "protocol": "http",
+  "allowCORS": true,
   "stubs": [
     {
       "responses": [
         {
           "is": {
             "headers": {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
             },
             "statusCode": 200,
             "body": {
@@ -58,7 +60,8 @@
         {
           "is": {
             "headers": {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
             },
             "statusCode": 200,
             "body": {
@@ -153,7 +156,8 @@
           "is": {
             "headers": {
               "Set-Cookie": "Authorization=TheToken",
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
             },
             "statusCode": 200,
             "body": {
@@ -185,7 +189,8 @@
         {
           "is": {
             "headers": {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
             },
             "statusCode": 200,
             "body": {
@@ -224,7 +229,8 @@
         {
           "is": {
             "headers": {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
             },
             "statusCode": 200,
             "body": {
@@ -252,7 +258,8 @@
         {
           "is": {
             "headers": {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
             },
             "statusCode": 200,
             "body": {
@@ -280,7 +287,8 @@
         {
           "is": {
             "headers": {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
             },
             "statusCode": 200,
             "body": {
