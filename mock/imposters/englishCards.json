@@ -49,8 +49,7 @@
             {
               "equals": {
                 "method": "POST",
-                "path": "/words",
-                "body": "{\"mode\":\"group\",\"groupId\":\"a611adea-b85e-411a-9d6a-68aa7d570e0c\"}"
+                "path": "/words"
               }
             }
           ]
