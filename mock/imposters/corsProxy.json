@@ -1,0 +1,16 @@
+{
+  "port": 9999,
+  "protocol": "http",
+  "stubs": [{
+    "responses": [{
+      "proxy": {
+        "to": "http://localhost:9991",
+        "mode": "proxyAlways",
+        "injectHeaders": {
+          "Access-Control-Allow-Credentials": "true",
+          "Access-Control-Allow-Origin": "*"
+        }
+      }
+    }]
+  }]
+}
