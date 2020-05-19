@@ -23,7 +23,7 @@
         font-size: 13px;
         font-weight: 600;
 
-        &:not(:last-of-type) {
+        &:not(:last-child) {
             margin-right: 20px;
         }
 
@@ -33,6 +33,26 @@
 
         &.active {
             color: $textColor4;
+        }
+    }
+
+    &__btn {
+        padding: 6px 10px;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1;
+        color: $textColor2;
+        background-color: $textColor5;
+        border: 1px solid $textColor5;
+        box-sizing: content-box;
+        border-radius: 3px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        cursor: pointer;
+
+        &:focus, &:hover {
+            outline: 0;
+            background-color: $textColor4;
+            box-shadow: 0 0 0 3px rgba(121, 82, 179, 0.25);
         }
     }
 }

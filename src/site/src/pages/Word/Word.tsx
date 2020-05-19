@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Slide, Title, Wrapper } from "../../components";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Word(props: any) {
     const arr = [
@@ -12,8 +12,9 @@ export function Word(props: any) {
 
     const [active, isActive] = useState(0);
     const [direction, isDirection] = useState("");
-    let slides = arr.map(item => ({active : false, direction: "" }));
-   
+    
+    const slides = new Array(arr.length).fill("").map(_ => ({active : false, direction: "" }));
+
     slides[active].active = true;
     slides[active].direction = `-show-to-${direction}`;
 
@@ -35,7 +36,7 @@ export function Word(props: any) {
     return (
         <div className="word">
             <Wrapper>
-                <p className="word__return"><NavLink to="/learn" className="word__return-link">Return to all words</NavLink></p>
+                <p className="word__return"><Link to="/learn" className="word__return-link">Return to all words</Link></p>
                 <Title classes={["word__title"]} title={`You have chosed category "${props.match.params.id}"`} />
                
                 <div className="word__content slider">
