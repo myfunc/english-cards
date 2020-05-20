@@ -1,4 +1,15 @@
-POST /login
+- - - - - - -
+All methods which return JSON have next fields:
+
+"isSuccess": bool,
+"error" : {
+	"code": number,
+	"message": string
+}
+
+- - - - - - -
+
+POST /api/login
 	Request 
 		Body:
 			{
@@ -18,13 +29,14 @@ POST /login
 				}
 			}
 		
-POST /registration
+POST /api/registration
 	Request:
 		Body:
 			{
 				"login": string,
 				"password": string,
-				"email": string
+				"email": string,
+				"nativeLangCode": string
 			}
 		
 	Response: 
@@ -37,7 +49,7 @@ POST /registration
 				}
 			}
 
-GET /userData
+POST /api/getUserData
 	Request 
 		Headers:
 			Cookies: Authorization=token                 // Requires token
@@ -53,11 +65,13 @@ GET /userData
 				"userData": {
 					"id": string,
 					"login": string,
-					"email": number
+					"email": number,
+					"nativeLangCode": string,
+					"foreignLangCode": string
 				}
 			}
 			
-GET /groups
+POST /api/getGroups
 	Request 
 		Headers:
 			Cookies: Authorization=token                 // Requires token
@@ -79,8 +93,9 @@ GET /groups
 				}]
 			}
 			
-POST /words
+POST /api/getWords
 	Request 
+		Headers:
 			Cookies: Authorization=token
 		Body:
 			{
@@ -96,16 +111,23 @@ POST /words
 					"code": number,
 					"message": string
 				},
+				"nativeLangCode": string,                // RU
+				"foreignLangCode": string,               // EN
 				"words": [{
 					"id": string,
-					"nativeTranslation": string,        // Russian word
-					"foreignTranslations": string[],    // English words
+					"name": string,  
+					"nativeTranslation": string,     // Russian word
+					"foreignTranslations": [{		 // English words
+						"translation": string,
+						"priority": number
+					}],
 					"imageUrl": string
 				}]
 			}
 			
-POST /commit
+POST /api/commitWords
 	Request 
+		Headers:
 			Cookies: Authorization=token
 		Body:
 			{
@@ -113,6 +135,159 @@ POST /commit
 					"wordId": string,
 					"learnAttempts": string,
 					"isStudied": boolean
+				}]
+			}
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				}
+			}
+
+// Admin methods
+			
+POST /api/admin/addWords
+	Request 
+		Headers:
+			Cookies: Authorization=token
+		Body:
+			{
+				"words": [{
+					"id": string? [GUID],
+					"name": string,
+					"translations": [{
+						"langCode": string ("RU"/"EN"/"DE"),
+						"translation": string,
+						"priority": number?
+					}]
+				}]
+			}
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				},
+				"addedWords": {
+					"id": string,
+					"name": string
+				}
+			}
+			
+POST /api/admin/addGroups
+	Request 
+		Headers:
+			Cookies: Authorization=token
+		Body:
+			{
+				"groups": [{
+					"id": string? [GUID],
+					"name": string,
+					"words": [{
+						"wordId": string
+					}]
+				}]
+			}
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				},
+				"addedGroups": {
+					"id": string,
+					"name": string
+				}
+			}
+			
+POST /api/admin/addTranslations
+	Request 
+		Headers:
+			Cookies: Authorization=token
+		Body:
+			{
+				"translations": [{
+					"id": string? [GUID]
+					"wordId": string,
+					"landCode": string,
+					"translation": string
+				}]
+			}
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				},
+				"addedTranslations": {
+					"id": string,
+					"translation": string
+				}
+			}
+			
+POST /api/admin/removeGroups
+	Request 
+		Headers:
+			Cookies: Authorization=token
+		Body:
+			{
+				"groups": [{
+					"id": string? [GUID]
+				}]
+			}
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				}
+			}
+			
+POST /api/admin/removeWords
+	Request 
+		Headers:
+			Cookies: Authorization=token
+		Body:
+			{
+				"words": [{
+					"id": string? [GUID]
+				}]
+			}
+		
+	Response 
+		Body:
+			{
+				"isSuccess": bool,
+				"error" : {
+					"code": number,
+					"message": string
+				}
+			}
+
+POST /api/admin/removeTranslation
+	Request 
+		Headers:
+			Cookies: Authorization=token
+		Body:
+			{
+				"translations": [{
+					"id": string? [GUID]
 				}]
 			}
 		
