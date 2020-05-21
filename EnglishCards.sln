@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishCards.Host", "src\se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishCards.Model", "src\server\EnglishCards.Model\EnglishCards.Model.csproj", "{6A2BA9CD-4D7F-4226-8B19-000C12AF574A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishCards.Service", "src\server\EnglishCards.Service\EnglishCards.Service.csproj", "{EA77D033-F77F-4B4D-8636-3D2AAE6A64F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishCards.Service", "src\server\EnglishCards.Service\EnglishCards.Service.csproj", "{EA77D033-F77F-4B4D-8636-3D2AAE6A64F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishCards.Contract", "src\server\EnglishCards.Contract\EnglishCards.Contract.csproj", "{C88D2DEA-701F-4761-B670-7EBFD21FD1B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishCards.Contract", "src\server\EnglishCards.Contract\EnglishCards.Contract.csproj", "{C88D2DEA-701F-4761-B670-7EBFD21FD1B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A07470B6-8B3D-47AA-A531-1F58C4904303}"
+	ProjectSection(SolutionItems) = preProject
+		TODO.txt = TODO.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EnglishCards.Contract.Api.Response
 {
-    public class LoginResponse
+    public class LoginResponse : BaseResponse
     {
     }
 }

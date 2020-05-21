@@ -8,5 +8,6 @@
 
         public string Translation { get; set; }
 
+        public int Priority { get; set; }
     }
 }

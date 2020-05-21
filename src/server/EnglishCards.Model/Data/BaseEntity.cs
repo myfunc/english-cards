@@ -15,6 +15,6 @@ namespace EnglishCards.Model.Data
         [Key]
         public Guid Id { get; set; }
 
-        public string Tags { get; set; }
+        public string Tags { get; set; } = string.Empty;
     }
 }
