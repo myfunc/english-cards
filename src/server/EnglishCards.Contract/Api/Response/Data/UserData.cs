@@ -9,5 +9,7 @@ namespace EnglishCards.Contract.Api.Response.Data
         public Guid Id { get; set; }
         public string Login { get; set; }
         public string Email { get; set; }
+        public string NativeLangCode { get; set; }
+        public string ForeignLangCode { get; set; }
     }
 }

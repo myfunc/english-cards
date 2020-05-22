@@ -51,17 +51,15 @@ namespace EnglishCards.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            foreach (IMutableEntityType entity in modelBuilder.Model.GetEntityTypes())
-            {
-                entity.SetTableName(entity.DisplayName());
-            }
-
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
+                entityType.SetTableName(entityType.DisplayName());
                 foreach (var property in entityType.GetProperties())
                 {
                     if (property.Name == "CreatedOn")
+                    {
                         property.SetDefaultValueSql("CURRENT_TIMESTAMP");
+                    }
                 }
             }
 

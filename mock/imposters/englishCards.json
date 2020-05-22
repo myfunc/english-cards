@@ -67,8 +67,8 @@
             "body": {
               "isSuccess": true,
               "error": null,
-              "nativeLangCode": "RU",
-              "foreignLangCode": "EN",
+              "nativeLangCode": "ru",
+              "foreignLangCode": "en",
               "words": [
                 {
                   "id": "0011adea-b85e-411a-9d6a-68aa7d570e0c",
@@ -76,14 +76,17 @@
                   "foreignTranslations": [
                     {
                       "translation": "obstacle",
+                      "langCode": "en",
                       "priority": 0
                     },
                     {
                       "translation": "barrier",
+                      "langCode": "en",
                       "priority": 0
                     },
                     {
                       "translation": "let",
+                      "langCode": "en",
                       "priority": 0
                     }
                   ],
@@ -95,6 +98,7 @@
                   "foreignTranslations": [
                     {
                       "translation": "defendant",
+                      "langCode": "en",
                       "priority": 0
                     },
                     {
@@ -110,10 +114,12 @@
                   "foreignTranslations": [
                     {
                       "translation": "judge",
+                      "langCode": "en",
                       "priority": 0
                     },
                     {
                       "translation": "referee",
+                      "langCode": "en",
                       "priority": 0
                     }
                   ],
@@ -125,14 +131,17 @@
                   "foreignTranslations": [
                     {
                       "translation": "sentence",
+                      "langCode": "en",
                       "priority": 0
                     },
                     {
                       "translation": "judgment",
+                      "langCode": "en",
                       "priority": 0
                     },
                     {
                       "translation": "condemnation",
+                      "langCode": "en",
                       "priority": 0
                     }
                   ],
@@ -331,8 +340,8 @@
                 "id": "0124adea-b85e-411a-9d6a-68aa7d512122",
                 "login": "testUser",
                 "email": "mail@example.com",
-                "nativeLangCode": "RU",
-                "foreignLangCode": "EN"
+                "nativeLangCode": "ru",
+                "foreignLangCode": "en"
               }
             }
           }

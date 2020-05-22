@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EnglishCards.Host.Services;
 using EnglishCards.Model;
+using EnglishCards.Model.Repositories;
 using EnglishCards.Service.Learn;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -34,8 +35,12 @@ namespace EnglishCards.Host
         {
             // TODO: Use services.AddDbContext<DataContext>()
             var dataContext = new DataContext(Configuration["ENGCAR_DBCONNECTION"]);
-            DataSeeder.SeedData(dataContext);
+
+            DataSeeder.SeedSystemData(dataContext);
+            DataSeeder.SeedTestData(dataContext);
+
             services.AddSingleton(dataContext);
+            services.AddSingleton(new DataRepository(dataContext));
         }
 
         public void ConfigureServices(IServiceCollection services)

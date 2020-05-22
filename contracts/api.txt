@@ -100,7 +100,11 @@ POST /api/getWords
 		Body:
 			{
 				"mode": string ("group"/"learned"/"all"),        // 3 possible values. If {"mode": "group"}, need to set "groupId"
-				"groupId": string
+				"groupId": string,
+				"pagination": {              // Optional. By default top=20, skip=0
+					"top": number,
+					"skip": number
+				}
 			}
 		
 	Response 
@@ -119,6 +123,7 @@ POST /api/getWords
 					"nativeTranslation": string,     // Russian word
 					"foreignTranslations": [{		 // English words
 						"translation": string,
+						"langCode": string,
 						"priority": number
 					}],
 					"imageUrl": string
@@ -133,8 +138,8 @@ POST /api/commitWords
 			{
 				"words": [{
 					"wordId": string,
-					"learnAttempts": string,
-					"isStudied": boolean
+					"learnAttempts": number,
+					"isLearned": boolean
 				}]
 			}
 		

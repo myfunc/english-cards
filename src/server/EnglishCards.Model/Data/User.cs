@@ -15,5 +15,7 @@ namespace EnglishCards.Model.Data
         public ICollection<ProgressData> ProgressData { get; set; }
 
         public Language NativeLanguage { get; set; }
+
+        public Language ForeignLanguage { get; set; }
     }
 }

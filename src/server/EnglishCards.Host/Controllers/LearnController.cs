@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using EnglishCards.Contract;
 using EnglishCards.Contract.Api.Request;
 using EnglishCards.Contract.Api.Response;
+using EnglishCards.Contract.Api.Response.Data;
 using EnglishCards.Host.Services;
 using EnglishCards.Service.Learn;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace EnglishCards.Host.Controllers
 {
@@ -27,34 +29,34 @@ namespace EnglishCards.Host.Controllers
             _requestContext = requestContextService.RequestContext;
         }
 
-        [HttpGet("groups")]
-        public GroupsResponse GetGroups()
+        [HttpGet("getGroups")]
+        public async Task<GroupsResponse> GetGroups()
         {
-            return _learnService.GetGroups();
+            return await _learnService.GetGroups(_requestContext);
         }
 
-        [HttpPost("words")]
-        public WordsResponse GetWords([FromBody] WordsRequest request)
+        [HttpPost("getWords")]
+        public async Task<WordsResponse> GetWords([FromBody] WordsRequest request)
         {
-            return _learnService.GetWords(request);
+            return await _learnService.GetWords(request, _requestContext);
         }
 
         [HttpPost("debug")]
         public string Debug()
         {
-            return string.Join(",", User.Claims.Select(p => $"{p.Type} = {p.Value}"));
+            return JsonConvert.SerializeObject(_requestContext);
         }
 
-        //[HttpGet("userData")]
-        //public WordsResponse GetUserData()
-        //{
-        //    return _learnService.GetUserData(request);
-        //}
+        [HttpGet("getUserData")]
+        public async Task<UserDataResponse> GetUserData()
+        {
+            return await _learnService.GetUserData(_requestContext);
+        }
 
-        //[HttpPost("commit")]
-        //public WordsResponse Commit([FromBody] CommitRequest request)
-        //{
-        //    return _learnService.Commit(request);
-        //}
+        [HttpPost("commitWords")]
+        public async Task<CommitResponse> CommitWords([FromBody] CommitRequest request)
+        {
+            return await _learnService.CommitWords(request, _requestContext);
+        }
     }
 }

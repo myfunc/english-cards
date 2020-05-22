@@ -1,4 +1,5 @@
 ﻿using EnglishCards.Contract;
+using EnglishCards.Contract.Common;
 using EnglishCards.Model;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -14,16 +15,34 @@ namespace EnglishCards.Host.Services
 
         public RequestContextService(DataContext dataContext, IHttpContextAccessor accessor)
         {
-            var headers = accessor.HttpContext.Request.Headers;
+            var httpContext = accessor.HttpContext;
 
-            var userId = accessor.HttpContext.User?.Identity;
+            var userId = accessor.HttpContext.User?.Identity?.Name;
             
             if (userId == null)
             {
                 return;
             }
 
-            RequestContext = new RequestContext();
+            var user = dataContext.Users.Find(new Guid(userId));
+            if (user == null)
+            {
+                return;
+            }
+
+            RequestContext = new RequestContext()
+            {
+                IP = httpContext.Connection.LocalIpAddress.ToString(),
+                Login = user.Login,
+                UserId = user.Id,
+                Tags = user.GetTags(),
+                Groups = user.UserInGroup.Select(p => new Group()
+                {
+                    Id = p.Group.Id,
+                    Name = p.Group.Name,
+                    Tags = p.Group.GetTags()
+                }).ToList()
+            };
         }
     }
 }

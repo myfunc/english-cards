@@ -24,7 +24,7 @@ namespace EnglishCards.Model
 
     public static class DataSeeder
     {
-        public static void SeedData(DataContext context)
+        public static void SeedSystemData(DataContext context)
         {
             var languages = new Language[]
                 {
@@ -48,7 +48,8 @@ namespace EnglishCards.Model
                         Password = "Aa123456",
                         Email = "mail@example.com",
                         Tags = "System",
-                        NativeLanguage = languages[1]
+                        NativeLanguage = languages[1],
+                        ForeignLanguage = languages[0]
                     }
                 };
 
@@ -80,6 +81,11 @@ namespace EnglishCards.Model
             context.AddRange(groups);
             context.AddRange(userInGroups);
             context.SaveChanges();
+        }
+
+        public static void SeedTestData(DataContext context)
+        {
+
         }
     }
 }

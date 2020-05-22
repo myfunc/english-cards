@@ -7,8 +7,9 @@ namespace EnglishCards.Contract.Api.Response.Data
     public class Word
     {
         public Guid Id { get; set; }
+        public string Name { get; set; }
         public string NativeTranslation { get; set; }
-        public string ForeignTranslation { get; set; }
+        public IEnumerable<WordTranslation> ForeignTranslations { get; set; }
         public string ImageUrl { get; set; }
     }
 }
