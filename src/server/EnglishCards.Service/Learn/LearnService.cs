@@ -1,6 +1,7 @@
 ﻿using EnglishCards.Contract.Api.Request;
 using EnglishCards.Contract.Api.Response;
 using EnglishCards.Contract.Api.Response.Data;
+using EnglishCards.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,13 @@ namespace EnglishCards.Service.Learn
 {
     public class LearnService
     {
+        private DataContext _dataContext;
+
+        public LearnService(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
+        // TODO: Make services as async
         public GroupsResponse GetGroups()
         {
             return new GroupsResponse()
@@ -59,6 +67,11 @@ namespace EnglishCards.Service.Learn
                     }
                 }
             };
+        }
+
+        public UserDataResponse GetUserData()
+        {
+            return null;
         }
     }
 }

@@ -47,8 +47,8 @@
           "and": [
             {
               "equals": {
-                "method": "GET",
-                "path": "/groups"
+                "method": "POST",
+                "path": "/api/getGroups"
               }
             }
           ]
@@ -67,14 +67,25 @@
             "body": {
               "isSuccess": true,
               "error": null,
+              "nativeLangCode": "RU",
+              "foreignLangCode": "EN",
               "words": [
                 {
                   "id": "0011adea-b85e-411a-9d6a-68aa7d570e0c",
                   "nativeTranslation": "препятствие",
                   "foreignTranslations": [
-                    "obstacle",
-                    "barrier",
-                    "let"
+                    {
+                      "translation": "obstacle",
+                      "priority": 0
+                    },
+                    {
+                      "translation": "barrier",
+                      "priority": 0
+                    },
+                    {
+                      "translation": "let",
+                      "priority": 0
+                    }
                   ],
                   "imageUrl": null
                 },
@@ -82,8 +93,14 @@
                   "id": "0022adea-b85e-411a-9d6a-68aa7d570e0c",
                   "nativeTranslation": "подсудимый",
                   "foreignTranslations": [
-                    "defendant",
-                    "accused"
+                    {
+                      "translation": "defendant",
+                      "priority": 0
+                    },
+                    {
+                      "translation": "accused",
+                      "priority": 0
+                    }
                   ],
                   "imageUrl": null
                 },
@@ -91,8 +108,14 @@
                   "id": "0033adea-b85e-411a-9d6a-68aa7d570e0c",
                   "nativeTranslation": "судья",
                   "foreignTranslations": [
-                    "judge",
-                    "referee"
+                    {
+                      "translation": "judge",
+                      "priority": 0
+                    },
+                    {
+                      "translation": "referee",
+                      "priority": 0
+                    }
                   ],
                   "imageUrl": null
                 },
@@ -100,9 +123,18 @@
                   "id": "0044adea-b85e-411a-9d6a-68aa7d570e0c",
                   "nativeTranslation": "приговор",
                   "foreignTranslations": [
-                    "sentence",
-                    "judgment",
-                    "condemnation"
+                    {
+                      "translation": "sentence",
+                      "priority": 0
+                    },
+                    {
+                      "translation": "judgment",
+                      "priority": 0
+                    },
+                    {
+                      "translation": "condemnation",
+                      "priority": 0
+                    }
                   ],
                   "imageUrl": null
                 }
@@ -117,7 +149,7 @@
             {
               "equals": {
                 "method": "POST",
-                "path": "/words"
+                "path": "/api/getWords"
               }
             }
           ],
@@ -174,7 +206,7 @@
             {
               "equals": {
                 "method": "POST",
-                "path": "/login",
+                "path": "/api/login",
                 "body": {
                   "login": "testUser",
                   "password": "Aa123456"
@@ -210,7 +242,7 @@
             {
               "equals": {
                 "method": "POST",
-                "path": "/login"
+                "path": "/api/login"
               }
             }
           ],
@@ -247,7 +279,7 @@
             {
               "equals": {
                 "method": "POST",
-                "path": "/registration"
+                "path": "/api/registration"
               }
             }
           ]
@@ -276,7 +308,7 @@
             {
               "equals": {
                 "method": "POST",
-                "path": "/commit"
+                "path": "/api/commit"
               }
             }
           ]
@@ -298,7 +330,9 @@
               "userData": {
                 "id": "0124adea-b85e-411a-9d6a-68aa7d512122",
                 "login": "testUser",
-                "email": "mail@example.com"
+                "email": "mail@example.com",
+                "nativeLangCode": "RU",
+                "foreignLangCode": "EN"
               }
             }
           }
@@ -309,8 +343,8 @@
           "and": [
             {
               "equals": {
-                "method": "GET",
-                "path": "/userData"
+                "method": "POST",
+                "path": "/api/getUserData"
               }
             }
           ]

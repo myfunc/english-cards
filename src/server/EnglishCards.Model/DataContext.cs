@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Text;
 using EnglishCards.Model.Data;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EnglishCards.Model
 {
@@ -22,16 +26,27 @@ namespace EnglishCards.Model
 
         private string _connectionString;
 
+        public readonly ILoggerFactory loggerFactory;
+
         public DataContext(string connectionString)
         {
+             loggerFactory = LoggerFactory.Create(builder => {
+                 builder.AddFilter("Microsoft", LogLevel.Warning)
+                        .AddFilter("System", LogLevel.Warning)
+                        .AddFilter("SampleApp.Program", LogLevel.Debug)
+                        .AddConsole();
+                        });
             _connectionString = connectionString;
-            // Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(_connectionString);
+            optionsBuilder
+                .UseLoggerFactory(loggerFactory)
+                .EnableSensitiveDataLogging()
+                .UseMySQL(_connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,6 +54,15 @@ namespace EnglishCards.Model
             foreach (IMutableEntityType entity in modelBuilder.Model.GetEntityTypes())
             {
                 entity.SetTableName(entity.DisplayName());
+            }
+
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.Name == "CreatedOn")
+                        property.SetDefaultValueSql("CURRENT_TIMESTAMP");
+                }
             }
 
             modelBuilder.Entity<UserInGroup>()
