@@ -1,0 +1,31 @@
+.modal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+
+    &__overlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, .3);
+    }
+
+    &__content {
+        position: relative;
+        width: 600px;
+        max-width: 100%;
+        box-sizing: border-box;
+        background-color: $elementColor2;
+        border-radius: 5px;
+        padding: 20px;
+    }
+}

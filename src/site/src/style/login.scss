@@ -1,0 +1,96 @@
+.login {
+    & .modal__content {
+        width: 300px;
+        padding: 40px;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        margin: 0 0 7px;
+    }
+
+    &__subtitle {
+        font-size: 14px;
+        font-weight: 600;
+        color: $textColor3;
+        margin: 0 0 20px;
+    }
+
+    &__field {
+        position: relative;
+
+        &:not(:last-of-type) {
+            margin-bottom: 10px;
+        }
+
+        &:last-of-type {
+            margin-bottom: 20px;
+        }
+    }
+
+    &__input {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 5px 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: $textColor1;
+        background-color: $elementColor2;
+        background-clip: padding-box;
+        border: 1px solid $elementColor1;
+        border-radius: 3px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        margin-bottom: 4px;
+
+        &:focus {
+            outline: 0;
+            border-color: $elementColor5;
+            box-shadow: 0 0 0 3px rgba(121, 82, 179, 0.25);
+        }
+    }
+
+    &__error-msg {
+        visibility: hidden;
+        color: $textColor4;
+        font-size: 10px;
+        min-height: 12px;
+        display: block;
+
+        &.-show {
+            visibility: visible;
+        }
+
+        &.-hide {
+            visibility: hidden;
+        }
+    }
+
+    &__button {
+        display: block;
+        padding: 5px 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: $textColor2;
+        background-color: $elementColor5;
+        border: 1px solid $elementColor5;
+        box-sizing: content-box;
+        border-radius: 3px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        cursor: pointer;
+
+        &:focus, &:hover {
+            outline: 0;
+            border-color: $elementColor2;
+            box-shadow: 0 0 0 3px rgba(121, 82, 179, 0.25);
+        }
+
+        &:disabled {
+            opacity: .7;
+        }
+    }
+}
