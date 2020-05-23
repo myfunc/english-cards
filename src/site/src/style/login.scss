@@ -20,25 +20,8 @@
         margin: 0 0 20px;
     }
 
-    &__input {
-        display: block;
-        padding: 5px 10px;
-        font-size: 1rem;
-        line-height: 1.5;
-        color: $textColor1;
-        background-color: $elementColor2;
-        background-clip: padding-box;
-        border: 1px solid $elementColor1;
-        box-sizing: content-box;
-        border-radius: 3px;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        
-
-        &:focus {
-            outline: 0;
-            border-color: $elementColor5;
-            box-shadow: 0 0 0 3px rgba(121, 82, 179, 0.25);
-        }
+    &__field {
+        position: relative;
 
         &:not(:last-of-type) {
             margin-bottom: 10px;
@@ -46,6 +29,44 @@
 
         &:last-of-type {
             margin-bottom: 20px;
+        }
+    }
+
+    &__input {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 5px 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: $textColor1;
+        background-color: $elementColor2;
+        background-clip: padding-box;
+        border: 1px solid $elementColor1;
+        border-radius: 3px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        margin-bottom: 4px;
+
+        &:focus {
+            outline: 0;
+            border-color: $elementColor5;
+            box-shadow: 0 0 0 3px rgba(121, 82, 179, 0.25);
+        }
+    }
+
+    &__error-msg {
+        visibility: hidden;
+        color: $textColor4;
+        font-size: 10px;
+        min-height: 12px;
+        display: block;
+
+        &.-show {
+            visibility: visible;
+        }
+
+        &.-hide {
+            visibility: hidden;
         }
     }
 

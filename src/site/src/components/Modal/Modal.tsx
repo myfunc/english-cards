@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 
 export type ModalProps = {
     children: any
-    beforeCloseCallback?: any
+    beforeCloseCallback?: (param: any) => void
     classes?: string[]
 }
 
 export function Modal(props: ModalProps) {
     const [hideModal, isHideModal] = useState(true);
 
-    
     const hideModalHandler = () => {
         isHideModal(false);
-        props.beforeCloseCallback(false);
+        if (props.beforeCloseCallback) {
+            props.beforeCloseCallback(false);
+
+        }
     }
 
     const classModifier = props.classes ? props.classes : []; 

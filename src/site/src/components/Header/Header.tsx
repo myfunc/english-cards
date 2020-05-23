@@ -18,12 +18,13 @@ export function Header() {
         label: "Progress"
     }];
 
-    const loginBtnHandler = () => {
+    const loginBtnHandler = () =>{
         isShowModal(true);
     }
 
     return (
         <header className="header">
+          
             <Wrapper classes={["header__wrapper"]}>
                 <img src={logo} className="header__logo" alt="unicorn"/> 
                 <p className="header__title">Learn English Words</p>
@@ -34,7 +35,7 @@ export function Header() {
             </Wrapper>
             {showModal && 
                 <Modal classes={["login"]} beforeCloseCallback={isShowModal}>
-                    <Login />
+                    <Login beforeCloseCallback={isShowModal} />
                 </Modal>
             }
         </header>

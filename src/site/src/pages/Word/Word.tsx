@@ -38,7 +38,7 @@ export function Word(props: any) {
             <Wrapper>
                 <p className="word__return"><Link to="/learn" className="word__return-link">Return to all words</Link></p>
                 <Title classes={["word__title"]} title={`You have chosed category "${props.match.params.id}"`} />
-               
+              
                 <div className="word__content slider">
                     <button className="slider__control slider__control_prev" onClick={prevHandler}  />
                     <button className="slider__control slider__control_next" onClick={nextHandler} />
