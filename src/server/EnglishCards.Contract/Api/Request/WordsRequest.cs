@@ -1,15 +1,15 @@
 ﻿using EnglishCards.Contract.Api.Request.Data;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using EnglishCards.Contract.Api.Request.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace EnglishCards.Contract.Api.Request
 {
     public class WordsRequest
     {
-        [JsonConverter(typeof(StringEnumConverter))]
+       // [JsonConverter(typeof(StringEnumConverter))]
         public WordRequestMode Mode { get; set; }
 
         public Guid? GroupId { get; set; }

@@ -20,6 +20,7 @@ namespace EnglishCards.Model
         public DbSet<ProgressDataWord> ProgressDataWords { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Word> Words { get; set; }
+        public DbSet<WordInGroupSet> WordInGroupSets { get; set; }
         public DbSet<WordTranslation> WordTranslations { get; set; }
         public DbSet<SysSetting> SysSettings { get; set; }
         public DbSet<UserInGroup> UserInGroups { get; set; }
@@ -28,17 +29,17 @@ namespace EnglishCards.Model
 
         public readonly ILoggerFactory loggerFactory;
 
-        public DataContext(string connectionString)
+        public DataContext(string connectionString, Action<DataContext> onCreateAction = null)
         {
              loggerFactory = LoggerFactory.Create(builder => {
-                 builder.AddFilter("Microsoft", LogLevel.Warning)
+                 builder.AddFilter("Microsoft", LogLevel.Information)
                         .AddFilter("System", LogLevel.Warning)
                         .AddFilter("SampleApp.Program", LogLevel.Debug)
                         .AddConsole();
                         });
             _connectionString = connectionString;
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+
+            onCreateAction?.Invoke(this);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

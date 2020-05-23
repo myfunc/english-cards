@@ -8,6 +8,7 @@ using EnglishCards.Contract.Api.Response;
 using EnglishCards.Contract.Api.Response.Data;
 using EnglishCards.Model;
 using EnglishCards.Model.Data;
+using EnglishCards.Model.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -21,20 +22,22 @@ namespace EnglishCards.Host.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private DataContext _context;
-        public AccountController(DataContext dataContext)
+        private AccountRepository _accountRepo;
+        private SystemRepository _systemRepo;
+        public AccountController(SystemRepository systemRepository, AccountRepository accountRepository)
         {
-            _context = dataContext;
+            _accountRepo = accountRepository;
+            _systemRepo = systemRepository;
         }
 
         [HttpPost("registration")]
         public async Task<RegistrationResponse> Registration([FromBody] RegistrationRequest request)
         {
-            User user = await _context.Users.FirstOrDefaultAsync(p => p.Login == request.Login || p.Email == request.Email);
-            if (user == null)
+            if (!await _accountRepo.IsUserExists(request.Login, request.Email))
             {
-                var language = await _context.Languages.FirstOrDefaultAsync(p => p.Code == request.NativeLangCode);
-                if (language == null)
+                var nativeLang = await _systemRepo.GetLanguageByCode(request.NativeLangCode);
+                var foreignLang = await _systemRepo.GetLanguageByCode(request.ForeignLangCode);
+                if (nativeLang == null || foreignLang == null)
                 {
                     return new RegistrationResponse()
                     {
@@ -47,24 +50,20 @@ namespace EnglishCards.Host.Controllers
 
                     };
                 }
-                user = new User()
+                var user = new User()
                 {
                     Id = Guid.NewGuid(),
                     Login = request.Login,
                     Email = request.Email,
                     Password = request.Password,
-                    NativeLanguage = language
+                    NativeLanguage = nativeLang,
+                    ForeignLanguage = foreignLang
                 };
 
-                var userInGroup = new UserInGroup()
-                {
-                    UserId = user.Id,
-                    GroupId = Constants.Groups.User
-                };
+                _accountRepo.AddUser(user);
+                _accountRepo.GrantUser(user.Id, Constants.Groups.User);
 
-                _context.Users.Add(user);
-                _context.UserInGroups.Add(userInGroup);
-                await _context.SaveChangesAsync();
+                await _accountRepo.SaveChanges();
 
                 return new RegistrationResponse();
             }
@@ -82,7 +81,7 @@ namespace EnglishCards.Host.Controllers
         [HttpPost("login")]
         public async Task<LoginResponse> Login([FromBody] LoginRequest request)
         {
-            User user = await _context.Users.FirstOrDefaultAsync(p => p.Login == request.Login && p.Password == request.Password);
+            User user = await _accountRepo.GetUserByLoginPassword(request.Login, request.Password);
             if (user != null)
             {
                 await Authenticate(user);

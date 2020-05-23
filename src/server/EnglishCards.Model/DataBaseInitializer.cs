@@ -3,25 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 
 namespace EnglishCards.Model
 {
-    public static class Constants
-    {
-        public static class Users
-        {
-            public static readonly Guid Admin = new Guid("52ee4399-b1cb-43eb-9842-792cfc4a7f89");
-        }
-
-        public static class Groups
-        {
-            public static readonly Guid Admin = new Guid("1d528109-9edf-404a-9607-e2b207e17a74");
-            public static readonly Guid User = new Guid("7c1e1967-716f-4851-b237-cb5479076b8b");
-        }
-    }
-
     public static class DataSeeder
     {
         public static void SeedSystemData(DataContext context)
@@ -85,7 +72,53 @@ namespace EnglishCards.Model
 
         public static void SeedTestData(DataContext context)
         {
+            int wordIndex = 0;
+            var enLang = context.Languages.Find("en");
+            var ruLang = context.Languages.Find("ru");
 
+            int groupCountSeed = 9;
+
+            context.AddRange(Enumerable.Range(0, 4)
+                .Select(n => new GroupSet()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Group_" + n.ToString(),
+                    WordInGroupSets = Enumerable.Range(0, groupCountSeed++)
+                        .Select(n => new WordInGroupSet()
+                        {
+                            Word = new Word()
+                            {
+                                Id = Guid.NewGuid(),
+                                Name = "Word_" + wordIndex++.ToString(),
+                                WordTranslations = Enumerable.Range(0, 5)
+                                .Select(t => new WordTranslation()
+                                {
+                                    Id = Guid.NewGuid(),
+                                    Priority = t,
+                                    Language = t % 2 == 0 ? enLang : ruLang,
+                                    Translation = "Translation_" + t.ToString()
+                                }).ToList()
+                            }
+                        }).ToList()
+                }).ToList());
+
+
+            //context.AddRange(Enumerable.Range(0, 12)
+            //    .Select(n => new Word()
+            //    {
+            //        Id = Guid.NewGuid(),
+            //        Name = "Word_" + wordIndex++.ToString(),
+            //        WordTranslations = Enumerable.Range(0, 5)
+            //            .Select(t => new WordTranslation()
+            //            {
+            //                Id = Guid.NewGuid(),
+            //                Priority = t,
+            //                Language = t % 2 == 0 ? enLang : ruLang,
+            //                Translation = "Translation_" + t.ToString()
+            //            }).ToList()
+            //    }).ToList());
+
+            context.SaveChanges();
         }
     }
 }

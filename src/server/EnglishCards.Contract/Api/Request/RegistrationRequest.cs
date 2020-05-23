@@ -20,5 +20,8 @@ namespace EnglishCards.Contract.Api.Request
 
         [Required]
         public string NativeLangCode { get; set; }
+
+        [Required]
+        public string ForeignLangCode { get; set; }
     }
 }

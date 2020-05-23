@@ -36,7 +36,8 @@ POST /api/registration
 				"login": string,
 				"password": string,
 				"email": string,
-				"nativeLangCode": string
+				"nativeLangCode": string,
+				"foreignLangCode": string
 			}
 		
 	Response: 

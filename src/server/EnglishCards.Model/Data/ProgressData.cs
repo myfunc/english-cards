@@ -6,6 +6,6 @@ namespace EnglishCards.Model.Data
     {
         public Language Language { get; set; }
 
-        public ICollection<ProgressDataWord> WordsProgress { get; set; }
+        public ICollection<ProgressDataWord> WordsProgress { get; set; } = new List<ProgressDataWord>();
     }
 }

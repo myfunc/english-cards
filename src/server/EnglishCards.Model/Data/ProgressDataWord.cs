@@ -9,5 +9,7 @@
         public int LearnAttempts { get; set; }
 
         public bool IsLearned { get; set; }
+
+        public ProgressData ProgressData { get; set; }
     }
 }

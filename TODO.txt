@@ -3,3 +3,6 @@
 - Протестировать LearnService
 - Сделать выполнение InitScript по args флагу
 - Сделать заполнение и пересоздание БД по args флагам
+- EnumToString converter
+- IgnoreNullValues
+- Оптимизировать запросы в Логине

@@ -33,14 +33,27 @@ namespace EnglishCards.Host
 
         public void InitDataContext(IServiceCollection services)
         {
-            // TODO: Use services.AddDbContext<DataContext>()
-            var dataContext = new DataContext(Configuration["ENGCAR_DBCONNECTION"]);
+            bool reinitDb = false;
 
-            DataSeeder.SeedSystemData(dataContext);
-            DataSeeder.SeedTestData(dataContext);
+            // TODO: Use services.AddDbContext<DataContext>()
+            DataContext dataContext;
+            if (reinitDb)
+            {
+                dataContext = new DataContext(Configuration["ENGCAR_DBCONNECTION"], 
+                    (context) =>
+                        {
+                            context.Database.EnsureDeleted();
+                            context.Database.EnsureCreated();
+                        });
+                DataSeeder.SeedSystemData(dataContext);
+                DataSeeder.SeedTestData(dataContext);
+            } 
+            else
+            {
+                dataContext = new DataContext(Configuration["ENGCAR_DBCONNECTION"]);
+            }
 
             services.AddSingleton(dataContext);
-            services.AddSingleton(new DataRepository(dataContext));
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -54,6 +67,9 @@ namespace EnglishCards.Host
 
             InitDataContext(services);
 
+            services.AddSingleton<SystemRepository>();
+            services.AddSingleton<AccountRepository>();
+            services.AddSingleton<DataRepository>();
             services.AddSingleton<LearnService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

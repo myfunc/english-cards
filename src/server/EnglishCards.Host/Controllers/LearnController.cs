@@ -56,7 +56,13 @@ namespace EnglishCards.Host.Controllers
         [HttpPost("commitWords")]
         public async Task<CommitResponse> CommitWords([FromBody] CommitRequest request)
         {
-            return await _learnService.CommitWords(request, _requestContext);
+            try
+            {
+                return await _learnService.CommitWords(request, _requestContext);
+            } catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

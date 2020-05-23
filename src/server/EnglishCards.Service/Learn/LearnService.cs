@@ -1,5 +1,6 @@
 ﻿using EnglishCards.Contract;
 using EnglishCards.Contract.Api.Request;
+using EnglishCards.Contract.Api.Request.Enums;
 using EnglishCards.Contract.Api.Response;
 using EnglishCards.Contract.Api.Response.Data;
 using EnglishCards.Model;
@@ -25,21 +26,24 @@ namespace EnglishCards.Service.Learn
         }
         public async Task<GroupsResponse> GetGroups(RequestContext requestContext)
         {
-            var user = await _dataContext.FindAsync<DBModel.User>(requestContext.UserId);
-            var progressData = user.ProgressData.FirstOrDefault(p => p.Language == user.ForeignLanguage);
+            var user = await _dataContext.Users
+                .Include("UserInGroup.Group")
+                .FirstAsync(p => p.Id == requestContext.UserId);
+
+            var progressData = GetUserProgress(user);
 
             var groupSets = _dataContext.GroupSets;
 
-            var groupsInResponse = groupSets.Select(p => new Group()
+            var groupsInResponse = groupSets
+                .AsEnumerable()
+                .Select(p => new Group()
             {
                 Id = p.Id,
                 Name = p.Name,
                 PreviewImageUrl = p.PreviewImageUrl,
                 TotalWords = p.WordInGroupSets.Count,
-                LearnedWords = p.WordInGroupSets
-                    .Where(w => progressData.WordsProgress
-                        .Where(wp => wp.IsLearned)
-                        .Any(wp => wp.Word.Id == w.WordId))
+                LearnedWords = progressData == null ? 0 : p.WordInGroupSets
+                    .Where(w => progressData.WordsProgress.Any(wp => wp.IsLearned && wp.Word.Id == w.WordId))
                     .Count()
             }).ToList();
 
@@ -52,31 +56,36 @@ namespace EnglishCards.Service.Learn
         public async Task<WordsResponse> GetWords(WordsRequest request, RequestContext requestContext)
         {
             var user = await _dataContext.FindAsync<DBModel.User>(requestContext.UserId);
-            var progressData = user.ProgressData.FirstOrDefault(p => p.Language == user.ForeignLanguage);
-
-            List<DBModel.Word> dbWords = null;
+            
+            List<DBModel.Word> dbWords = new List<DBModel.Word>();
 
             if (request.Mode == WordRequestMode.Group)
             {
-                dbWords = _dataContext.Words
-                    .Where(p => p.WordInGroupSets.Any(w => w.GroupSetId == request.GroupId))
-                    .Take(request.Pagination.Top)
-                    .Skip(request.Pagination.Skip).ToList();
+                dbWords = _dataContext.WordInGroupSets
+                    .Where(p => p.GroupSetId == request.GroupId)
+                    .Select(p => p.Word)
+                    .Skip(request.Pagination.Skip)
+                    .Take(request.Pagination.Top).ToList();
             }
 
             if (request.Mode == WordRequestMode.Learned)
             {
-                dbWords = _dataContext.Words
-                    .Where(p => progressData.WordsProgress.Any(wp => wp.Id == p.Id && wp.IsLearned))
-                    .Take(request.Pagination.Top)
-                    .Skip(request.Pagination.Skip).ToList();
+                var progressData = GetUserProgress(user);
+                if (progressData != null)
+                {
+                    dbWords = progressData.WordsProgress
+                        .Where(p => p.IsLearned)
+                        .Select(p => p.Word)
+                        .Skip(request.Pagination.Skip)
+                        .Take(request.Pagination.Top).ToList();
+                }
             }
 
             if (request.Mode == WordRequestMode.All)
             {
                 dbWords = _dataContext.Words
-                    .Take(request.Pagination.Top)
-                    .Skip(request.Pagination.Skip).ToList();
+                    .Skip(request.Pagination.Skip)
+                    .Take(request.Pagination.Top).ToList();
             }
 
             if (dbWords == null)
@@ -92,6 +101,16 @@ namespace EnglishCards.Service.Learn
                 };
             }
 
+            if (dbWords.Count == 0)
+            {
+                return new WordsResponse()
+                {
+                    NativeLangCode = user.NativeLanguage.Code,
+                    ForeignLangCode = user.ForeignLanguage.Code,
+                    Words = Enumerable.Empty<Word>()
+                };
+            }
+
             var filteredWords = dbWords
                 .Where(p =>
                     p.WordTranslations.Any(t => t.Language.Code == user.ForeignLanguage.Code) &&
@@ -102,6 +121,7 @@ namespace EnglishCards.Service.Learn
             {
                 Id = p.Id,
                 ImageUrl = p.ImageUrl,
+                Name = p.Name,
                 NativeTranslation = p.WordTranslations
                     .OrderByDescending(t => t.Translation)
                     .First(t => t.Language.Code == user.NativeLanguage.Code)
@@ -143,7 +163,26 @@ namespace EnglishCards.Service.Learn
         public async Task<CommitResponse> CommitWords(CommitRequest request, RequestContext requestContext)
         {
             var user = await _dataContext.FindAsync<DBModel.User>(requestContext.UserId);
-            var progressData = user.ProgressData.FirstOrDefault(p => p.Language == user.ForeignLanguage);
+            var progressData = GetUserProgress(user);
+
+            if (progressData == null)
+            {
+                progressData = new DBModel.ProgressData()
+                {
+                    Language = user.ForeignLanguage,
+                    WordsProgress = new List<DBModel.ProgressDataWord>()
+                };
+                if (user.ProgressData == null)
+                {
+                    user.ProgressData = new List<DBModel.ProgressData>();
+                }
+                user.ProgressData.Add(progressData);
+            }
+
+            //await _dataContext.SaveChangesAsync();
+
+            // user = await _dataContext.FindAsync<DBModel.User>(requestContext.UserId);
+            // progressData = GetUserProgress(user);
 
             foreach (var commitWord in request.Words)
             {
@@ -152,16 +191,22 @@ namespace EnglishCards.Service.Learn
                     p.Language.Code == user.ForeignLanguage.Code);
                 if (progressWord == null)
                 {
-                    var newProgressWord = new DBModel.ProgressDataWord()
+                    DBModel.Word commitedWord = await _dataContext.Words.FindAsync(commitWord.WordId);
+                    if (commitedWord != null)
                     {
-                        Id = Guid.NewGuid(),
-                        LearnAttempts = commitWord.LearnAttempts,
-                        IsLearned = commitWord.IsLearned,
-                        Word = new DBModel.Word() { Id = commitWord.WordId },
-                        Language = user.ForeignLanguage
-                    };
-                    progressData.WordsProgress.Add(newProgressWord);
-                } else
+                        var newProgressWord = new DBModel.ProgressDataWord()
+                        {
+                            Id = Guid.NewGuid(),
+                            LearnAttempts = commitWord.LearnAttempts,
+                            IsLearned = commitWord.IsLearned,
+                            Word = commitedWord,
+                            Language = user.ForeignLanguage
+                        };
+                        _dataContext.Add(newProgressWord);
+                        progressData.WordsProgress.Add(newProgressWord);
+                    }
+                } 
+                else
                 {
                     progressWord.IsLearned = commitWord.IsLearned;
                     progressWord.LearnAttempts = commitWord.LearnAttempts + progressWord.LearnAttempts;
@@ -171,6 +216,11 @@ namespace EnglishCards.Service.Learn
             await _dataContext.SaveChangesAsync();
 
             return new CommitResponse();
+        }
+
+        private DBModel.ProgressData GetUserProgress(DBModel.User user)
+        {
+            return user.ProgressData?.FirstOrDefault(p => p.Language == user.ForeignLanguage);
         }
     }
 }

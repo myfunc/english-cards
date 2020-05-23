@@ -4,12 +4,8 @@ using System.Text;
 
 namespace EnglishCards.Model.Repositories
 {
-    public class DataRepository
+    public class DataRepository : BaseRepository
     {
-        private readonly DataContext _dataContext;
-        public DataRepository(DataContext dataContext)
-        {
-            _dataContext = dataContext;
-        }
+        public DataRepository(DataContext dataContext) : base(dataContext) { }
     }
 }

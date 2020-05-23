@@ -6,6 +6,6 @@ namespace EnglishCards.Model.Data
     {
         public string Name { get; set; }
         public string PreviewImageUrl { get; set; }
-        public ICollection<WordInGroupSet> WordInGroupSets { get; set; }
+        public ICollection<WordInGroupSet> WordInGroupSets { get; set; } = new List<WordInGroupSet>();
     }
 }

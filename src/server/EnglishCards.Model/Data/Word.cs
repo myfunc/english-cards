@@ -8,8 +8,8 @@ namespace EnglishCards.Model.Data
 
         public string ImageUrl { get; set; }
 
-        public ICollection<WordInGroupSet> WordInGroupSets { get; set; }
+        public ICollection<WordInGroupSet> WordInGroupSets { get; set; } = new List<WordInGroupSet>();
 
-        public ICollection<WordTranslation> WordTranslations { get; set; }
+        public ICollection<WordTranslation> WordTranslations { get; set; } = new List<WordTranslation>();
     }
 }
