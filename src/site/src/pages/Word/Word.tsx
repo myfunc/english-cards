@@ -13,7 +13,7 @@ export function Word(props: any) {
     const [active, isActive] = useState(0);
     const [direction, isDirection] = useState("");
     
-    const slides = new Array(arr.length).fill("").map(_ => ({active : false, direction: "" }));
+    const slides = Array.from({length: arr.length}).map(_ => ({active : false, direction: "" }));
 
     slides[active].active = true;
     slides[active].direction = `-show-to-${direction}`;

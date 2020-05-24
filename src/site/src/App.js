@@ -1,7 +1,8 @@
 import React from "react";
 import "./style.scss";
 import { Layout } from "./components";
-import { Learn, Progress, Main, Word } from "./pages";
+import { Progress, Main, Word } from "./pages";
+import Learn from "./pages/Learn/Learn"
 import { Route, Switch } from "react-router-dom";
 
 function App() {
