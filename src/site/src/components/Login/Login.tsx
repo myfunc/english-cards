@@ -131,10 +131,8 @@ export function Login(props: LoginProps) {
             body: JSON.stringify(authData)
         }
 
-        console.log(options);
-
         try {
-            let response = await fetch("http://localhost:9999/login", {...options, credentials: "include"});
+            let response = await fetch("http://localhost:9999/api/login", {...options, credentials: "include"});
             console.log(response);
             if (props.beforeCloseCallback) {
                 props.beforeCloseCallback(false);
