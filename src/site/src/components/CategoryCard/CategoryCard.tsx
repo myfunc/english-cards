@@ -18,7 +18,7 @@ export function CategoryCard(props: CategoryCardProps) {
         <NavLink to={`/learn/${props.name}`}>
             <div id={props.id} className="category-card">
                 <p className="category-card__progress">{props.learnedWords}/{props.totalWords}</p>
-                <img className="category-card__img" src={props.previewImageUrl} />
+                <img className="category-card__img" src={props.previewImageUrl} alt={props.previewImageUrl} />
                 <p className="category-card__name">{props.name}</p>
             </div>
         </NavLink>
